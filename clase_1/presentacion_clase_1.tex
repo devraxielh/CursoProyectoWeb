@@ -1,0 +1,293 @@
+\documentclass{beamer}
+
+% Configuración del tema
+\usetheme{Madrid}
+\usecolortheme{default}
+
+% Paquetes para español y codificación
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{positioning, arrows.meta, shapes.geometric}
+\usepackage{hyperref}
+
+% Información del título
+\title[Clase 1: Fundamentos y Formulación]{Clase 1: Fundamentos de la Web y Formulación del Proyecto}
+\subtitle{Proyecto Web}
+\author{Rodrigo García, PhD}
+\date{\today}
+
+\begin{document}
+
+% Diapositiva de Título
+\begin{frame}
+    \titlepage
+\end{frame}
+
+% Índice
+\begin{frame}{Agenda de la Clase}
+    \tableofcontents
+\end{frame}
+
+% ==========================================
+% SECCIÓN 1: CONCEPTOS BÁSICOS DE LA WEB
+% ==========================================
+\section{Conceptos Básicos de la Web}
+
+\begin{frame}{¿Qué es la Web?}
+    \begin{itemize}
+        \item La World Wide Web (WWW) es un sistema de información interconectado accesible a través de Internet.
+        \item Diferencia clave: Internet es la infraestructura (cables, routers), la Web es el servicio que usamos sobre ella.
+        \item Creada por Tim Berners-Lee en 1989.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Arquitectura Cliente-Servidor (Visualización)}
+    \begin{center}
+    \begin{tikzpicture}[
+        node distance=4.5cm,
+        box/.style={draw, rounded corners, align=center, inner sep=2mm, fill=blue!10, minimum height=1.5cm, minimum width=2.5cm},
+        arrow/.style={-{Stealth[length=2mm]}, thick},
+        textlabel/.style={font=\small, align=center}
+    ]
+        
+        % Nodos
+        \node[box] (cliente) {\textbf{Cliente}\\(Navegador Web)};
+        \node[box, right=of cliente, fill=green!10] (servidor) {\textbf{Servidor}\\(Aplicación / BD)};
+        
+        % Flechas
+        \draw[arrow, color=blue!70!black] ([yshift=3mm]cliente.east) -- ([yshift=3mm]servidor.west) 
+            node[midway, above, textlabel] {1. \textbf{Petición HTTP/HTTPS}\\(Ej: GET /index.html)};
+            
+        \draw[arrow, color=green!60!black] ([yshift=-3mm]servidor.west) -- ([yshift=-3mm]cliente.east) 
+            node[midway, below, textlabel] {2. \textbf{Respuesta HTTP/HTTPS}\\(Ej: Envía archivo HTML)};
+            
+    \end{tikzpicture}
+    \end{center}
+    
+    \vspace{0.3cm}
+    \begin{itemize}
+        \item \textbf{Cliente:} Inicia la comunicación solicitando información.
+        \item \textbf{Servidor:} Escucha peticiones, procesa la lógica y devuelve resultados.
+        \item \textbf{Protocolo HTTP/HTTPS:} Es el "idioma" estándar de la web. HTTPS incluye una capa de cifrado para seguridad.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{La Tríada de la Web Frontend (Visualización)}
+    \begin{center}
+    \begin{tikzpicture}[
+        node distance=0.1cm and 0.1cm,
+        box/.style={draw, rounded corners, align=center, inner sep=2mm, minimum height=2.2cm, minimum width=3cm},
+        html/.style={box, fill=orange!20, draw=orange!80!black, thick},
+        css/.style={box, fill=blue!20, draw=blue!80!black, thick},
+        js/.style={box, fill=yellow!30, draw=yellow!80!black, thick}
+    ]
+        
+        \node[html] (html) {\Large\textbf{HTML}\\[1ex] \textbf{Estructura}\\[0.5ex] \small(El esqueleto)};
+        \node[right=0.1cm of html] (plus1) {\Large \textbf{+}};
+        
+        \node[css, right=0.1cm of plus1] (css) {\Large\textbf{CSS}\\[1ex] \textbf{Estilo}\\[0.5ex] \small(La piel/ropa)};
+        \node[right=0.1cm of css] (plus2) {\Large \textbf{+}};
+        
+        \node[js, right=0.1cm of plus2] (js) {\Large\textbf{JS}\\[1ex] \textbf{Acción}\\[0.5ex] \small(Los músculos)};
+            
+    \end{tikzpicture}
+    \end{center}
+    
+    \vspace{0.3cm}
+    \begin{itemize}
+        \item \textbf{HTML:} Define qué elementos existen en la página (párrafos, imágenes, botones, formularios).
+        \item \textbf{CSS:} Define cómo se ven visualmente esos elementos (colores, posición, tipografía, responsividad).
+        \item \textbf{JavaScript:} Define qué ocurre al interactuar (animaciones, clics, carga de datos dinámicos).
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Profundizando en HTML: La Estructura}
+    \begin{itemize}
+        \item \textbf{Significado:} \textit{HyperText Markup Language} (Lenguaje de Marcado de Hipertexto).
+        \item \textbf{Propósito:} Organizar y estructurar el contenido de la web usando etiquetas (tags).
+    \end{itemize}
+    
+    \vspace{0.3cm}
+    \textbf{Ejemplo de sintaxis:}
+    \begin{verbatim}
+    <h1>Bienvenido a mi Proyecto</h1>
+    <p>Este es un texto descriptivo del problema.</p>
+    <a href="https://ejemplo.com">Enlace de prueba</a>
+    <img src="logo.png" alt="Logotipo">
+    \end{verbatim}
+    
+    \vspace{0.3cm}
+    \begin{itemize}
+        \item Las etiquetas suelen tener apertura \verb|<etiqueta>| y cierre \verb|</etiqueta>|.
+        \item \textbf{Regla de oro:} HTML debe centrarse en \textbf{QUÉ} es el contenido (semántica), no en \textbf{CÓMO} se ve visualmente.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Backend, BD y API (Visualización)}
+    \begin{center}
+    \begin{tikzpicture}[
+        node distance=1.5cm and 1.8cm,
+        box/.style={draw, rounded corners, align=center, inner sep=2mm, minimum height=1.5cm, minimum width=2.2cm},
+        front/.style={box, fill=orange!20, draw=orange!80!black, thick},
+        api/.style={box, fill=gray!20, draw=gray!80!black, thick, dashed},
+        back/.style={box, fill=green!20, draw=green!80!black, thick},
+        db/.style={box, cylinder, shape border rotate=90, aspect=0.25, fill=purple!20, draw=purple!80!black, thick, minimum height=1.8cm, minimum width=1.6cm},
+        arrow/.style={-{Stealth[length=2mm]}, thick},
+        bidir/.style={<->, >=Stealth, thick},
+        textlabel/.style={font=\scriptsize, align=center}
+    ]
+        
+        % Nodos
+        \node[front] (frontend) {\textbf{Frontend}\\(Navegador)};
+        \node[api, right=of frontend] (api) {\textbf{API}\\(Puente)};
+        \node[back, right=of api] (backend) {\textbf{Backend}\\(Lógica)};
+        \node[db, below=of backend, yshift=0.5cm] (database) {\textbf{Base de}\\\textbf{Datos}};
+        
+        % Flechas
+        \draw[bidir, color=blue!70!black] (frontend.east) -- (api.west) 
+            node[midway, above, textlabel] {Petición JSON}
+            node[midway, below, textlabel] {Respuesta};
+            
+        \draw[arrow, color=gray!80!black] (api.east) -- (backend.west);
+        
+        \draw[bidir, color=red!70!black] (backend.south) -- (database.north) 
+            node[midway, right, textlabel] {SQL / NoSQL};
+            
+    \end{tikzpicture}
+    \end{center}
+    
+    \vspace{0.2cm}
+    \begin{itemize}
+        \item \textbf{Backend:} Contiene la lógica segura. Recibe órdenes, procesa datos y devuelve resultados (Node.js, Python, Java).
+        \item \textbf{BD (Base de Datos):} Almacén estructurado y persistente (PostgreSQL, MongoDB).
+        \item \textbf{API:} El "menú". Define las reglas y formatos en los que el Frontend puede pedir datos al Backend.
+    \end{itemize}
+\end{frame}
+
+% ==========================================
+% SECCIÓN 2: IDENTIFICACIÓN DEL PROBLEMA
+% ==========================================
+\section{Identificación del Problema y Usuarios Objetivo}
+
+\begin{frame}{El Proyecto Integrador}
+    \begin{block}{¿Qué vamos a construir?}
+        Una aplicación web completa a lo largo del semestre que integre Frontend, Backend, Base de Datos, despliegue en la Nube y medidas de Seguridad.
+    \end{block}
+    \vspace{0.5cm}
+    Para que el proyecto tenga sentido, debe resolver un \textbf{problema real}.
+\end{frame}
+
+\begin{frame}{Identificación del Problema}
+    \begin{itemize}
+        \item Todo buen proyecto web nace de una necesidad.
+        \item \textbf{Preguntas clave:}
+        \begin{itemize}
+            \item ¿Qué proceso es actualmente ineficiente o manual?
+            \item ¿Qué información es difícil de encontrar o gestionar?
+            \item ¿Quién está sufriendo este dolor (pain point)?
+        \end{itemize}
+        \item \textbf{Ejemplos:} Gestión de inventario para un negocio local, plataforma de reservas para servicios, sistema de control para grupos estudiantiles.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Definición de Usuarios Objetivo}
+    \begin{itemize}
+        \item ¿Para quién estamos construyendo esto?
+        \item No todos los usuarios son iguales (Roles: Administrador, Cliente, Empleado).
+        \item \textbf{User Personas:} Crear perfiles ficticios pero realistas de quién usará la app.
+        \item Entender el contexto técnico del usuario (¿Usan móvil o PC? ¿Tienen buena conexión a internet?).
+    \end{itemize}
+\end{frame}
+
+% ==========================================
+% SECCIÓN 3: EQUIPOS Y REPOSITORIO
+% ==========================================
+\section{Equipos de Trabajo y Control de Versiones}
+
+\begin{frame}{Formación de Equipos}
+    \begin{itemize}
+        \item El trabajo en el desarrollo web es altamente colaborativo.
+        \item \textbf{Tamaño ideal:} 4 a 5 personas.
+        \item \textbf{Roles sugeridos (aunque todos toquen código):}
+        \begin{itemize}
+            \item Frontend Lead
+            \item Backend/API Lead
+            \item Scrum Master / Project Manager (Organización)
+            \item DevOps / Cloud Lead (Despliegue)
+        \end{itemize}
+        \item \textbf{Dinámica:} Formación de grupos y selección de una idea de proyecto.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Responsabilidades por Rol}
+    \begin{itemize}
+        \item \textbf{Frontend Lead:} Define la arquitectura de la interfaz. Vela por la experiencia de usuario (UX), accesibilidad y el diseño responsivo.
+        \item \textbf{Backend/API Lead:} Diseña la base de datos, crea los endpoints de la API y asegura que la lógica de negocio y la seguridad estén correctamente implementadas.
+        \item \textbf{Scrum Master / Project Manager:} Facilita el trabajo del equipo, organiza las tareas en el tablero Kanban (GitHub Projects, Trello), y se asegura de cumplir los hitos de entrega.
+        \item \textbf{DevOps / Cloud Lead:} Configura y mantiene el repositorio (Git/GitHub), gestiona el flujo de trabajo (ramas, PRs), y despliega la aplicación en servicios en la nube.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Control de Versiones (Git y GitHub)}
+    \begin{itemize}
+        \item ¿Qué pasa si dos personas editan el mismo archivo al mismo tiempo? Git lo resuelve.
+        \item \textbf{Git:} Sistema de control de versiones local.
+        \item \textbf{GitHub/GitLab:} Plataforma en la nube para alojar repositorios Git y colaborar.
+        \item \textbf{Conceptos básicos:} \texttt{commit}, \texttt{push}, \texttt{pull}, \texttt{branch}, \texttt{merge}.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Creación del Repositorio del Proyecto}
+    \begin{block}{Actividad Práctica}
+        \begin{enumerate}
+            \item Crear una organización o repositorio en GitHub.
+            \item Invitar a todos los miembros del equipo.
+            \item Configurar el archivo \texttt{README.md} inicial con el nombre del proyecto y la descripción del problema.
+            \item (Opcional) Configurar el archivo \texttt{.gitignore}.
+        \end{enumerate}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Ejemplos de Proyectos: Problema y Usuarios}
+    \begin{small}
+    \begin{itemize}
+        \item \textbf{1. Periódico Escolar Digital:} \\ \textit{Problema:} Los estudiantes no se enteran de las noticias o eventos del colegio. \\ \textit{Usuarios:} Redactores (Admin), Estudiantes (Lectores).
+        \item \textbf{2. Votaciones del Consejo Estudiantil:} \\ \textit{Problema:} El conteo de votos en papel es lento y poco transparente. \\ \textit{Usuarios:} Comité Electoral (Admin), Estudiantes (Votantes).
+        \item \textbf{3. Intercambio de Libros Usados:} \\ \textit{Problema:} Es difícil encontrar quién tiene un libro que ya no usa. \\ \textit{Usuarios:} Estudiantes ofreciendo libros, Estudiantes buscando libros.
+        \item \textbf{4. Menú de Cafetería Estudiantil:} \\ \textit{Problema:} Filas largas en el recreo porque los alumnos no saben qué hay. \\ \textit{Usuarios:} Encargado de Cafetería (Admin), Estudiantes (Clientes).
+        \item \textbf{5. Torneo Deportivo del Colegio:} \\ \textit{Problema:} Nadie sabe a qué hora juega su equipo ni la tabla de posiciones. \\ \textit{Usuarios:} Organizador (Admin), Jugadores/Espectadores (Usuarios).
+    \end{itemize}
+    \end{small}
+\end{frame}
+
+\begin{frame}{Más Ideas de Proyectos}
+    \begin{small}
+    \begin{itemize}
+        \item \textbf{1. Control de Gastos Personales:} \\ \textit{Problema:} Desconocimiento de en qué se va el dinero (gastos hormiga). \\ \textit{Usuarios:} Cualquier persona (Usuario único).
+        \item \textbf{2. Gestor de Tareas y Hábitos:} \\ \textit{Problema:} Desorganización en la rutina diaria y olvido de responsabilidades. \\ \textit{Usuarios:} Estudiantes o Profesionales (Usuario único).
+        \item \textbf{3. Catálogo para Emprendedores:} \\ \textit{Problema:} Ventas desorganizadas por WhatsApp y falta de un menú formal. \\ \textit{Usuarios:} Vendedor (Admin), Compradores (Clientes).
+        \item \textbf{4. Inventario de Despensa:} \\ \textit{Problema:} Comprar productos repetidos o dejar vencer alimentos por olvido. \\ \textit{Usuarios:} Administrador del hogar (Admin), Miembros de la familia.
+        \item \textbf{5. Directorio de Emergencias Locales:} \\ \textit{Problema:} Demora en encontrar números críticos durante una crisis. \\ \textit{Usuarios:} Todos los miembros de una familia o comunidad.
+    \end{itemize}
+    \end{small}
+\end{frame}
+
+\begin{frame}{Próximos Pasos}
+    \begin{itemize}
+        \item \textbf{Para la próxima clase:}
+        \begin{itemize}
+            \item Idea de proyecto definida.
+            \item Documento inicial con: Problema, Usuarios Objetivo.
+            \item Repositorio de GitHub creado con todo el equipo dentro.
+        \end{itemize}
+    \end{itemize}
+    \vspace{1cm}
+    \begin{center}
+        \Large \textbf{¡Manos a la obra!}
+    \end{center}
+\end{frame}
+
+\end{document}
