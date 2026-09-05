@@ -1,0 +1,143 @@
+\documentclass{beamer}
+
+% Configuración del tema
+\usetheme{Madrid}
+\usecolortheme{default}
+
+% Paquetes para español y codificación
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{positioning, arrows.meta, shapes.geometric}
+\usepackage{hyperref}
+
+% Información del título
+\title[Clase 2: Requerimientos]{Clase 2: Análisis de Requerimientos Funcionales y No Funcionales}
+\subtitle{Proyecto Web}
+\author{Rodrigo García, PhD}
+\date{\today}
+
+\begin{document}
+
+% Diapositiva de Título
+\begin{frame}
+    \titlepage
+\end{frame}
+
+% Índice
+\begin{frame}{Agenda de la Clase}
+    \tableofcontents
+\end{frame}
+
+% ==========================================
+% SECCIÓN 1: INTRODUCCIÓN
+% ==========================================
+\section{Introducción a los Requerimientos}
+
+\begin{frame}{¿Qué son los Requerimientos?}
+    \begin{itemize}
+        \item Un requerimiento es una condición o capacidad que debe cumplir un sistema para satisfacer un contrato, estándar o especificación.
+        \item Son la base de cualquier proyecto de desarrollo de software.
+        \item \textbf{Propósito:} Asegurar que lo que construimos es exactamente lo que el cliente o el usuario final necesita.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Importancia de unos Buenos Requerimientos}
+    \begin{itemize}
+        \item \textbf{Reducen costos y tiempo:} Detectar un error en la fase de requerimientos es mucho más barato que corregirlo en producción.
+        \item \textbf{Guían el diseño:} Ayudan a definir la arquitectura del sistema, la base de datos y la interfaz de usuario.
+        \item \textbf{Miden el éxito:} Sirven como criterio de aceptación para validar que el proyecto fue exitoso.
+    \end{itemize}
+\end{frame}
+
+% ==========================================
+% SECCIÓN 2: REQUERIMIENTOS FUNCIONALES
+% ==========================================
+\section{Requerimientos Funcionales (RF)}
+
+\begin{frame}{¿Qué son los Requerimientos Funcionales?}
+    \begin{itemize}
+        \item Definen \textbf{LO QUE} el sistema debe hacer.
+        \item Son los comportamientos, funciones y procesos específicos que el software debe ser capaz de ejecutar.
+        \item Describen la interacción entre el sistema y su entorno (usuarios, otros sistemas).
+    \end{itemize}
+    \vspace{0.3cm}
+    \begin{block}{Regla mnemotécnica}
+    \textbf{Verbos:} El sistema \textbf{debe permitir}..., El sistema \textbf{calculará}..., El usuario \textbf{podrá iniciar sesión}....
+    \end{block}
+\end{frame}
+
+\begin{frame}{Ejemplos de Requerimientos Funcionales}
+    \begin{itemize}
+        \item El sistema debe permitir a los usuarios registrarse con un correo electrónico y una contraseña.
+        \item El sistema debe enviar un correo de confirmación al usuario tras un registro exitoso.
+        \item El administrador podrá generar un reporte mensual de ventas en formato PDF.
+        \item El sistema debe permitir al usuario añadir productos a un carrito de compras.
+        \item El software calculará automáticamente el IVA aplicable a la compra final.
+    \end{itemize}
+\end{frame}
+
+% ==========================================
+% SECCIÓN 3: REQUERIMIENTOS NO FUNCIONALES
+% ==========================================
+\section{Requerimientos No Funcionales (RNF)}
+
+\begin{frame}{¿Qué son los Requerimientos No Funcionales?}
+    \begin{itemize}
+        \item Definen \textbf{CÓMO} el sistema debe comportarse o las cualidades que debe poseer.
+        \item No hablan de una acción específica, sino de las \textbf{restricciones} y \textbf{atributos de calidad} del sistema.
+    \end{itemize}
+    \vspace{0.3cm}
+    \begin{block}{Categorías comunes}
+    Rendimiento, Seguridad, Usabilidad, Escalabilidad, Disponibilidad, Compatibilidad.
+    \end{block}
+\end{frame}
+
+\begin{frame}{Ejemplos de Requerimientos No Funcionales}
+    \begin{itemize}
+        \item \textbf{Rendimiento:} La página de inicio debe cargar en menos de 2 segundos.
+        \item \textbf{Seguridad:} Las contraseñas de los usuarios deben almacenarse encriptadas en la base de datos (Ej: bcrypt).
+        \item \textbf{Usabilidad:} El sistema debe ser responsivo y verse bien tanto en móviles como en computadoras de escritorio.
+        \item \textbf{Disponibilidad:} El sistema debe estar disponible el 99.9\% del tiempo.
+        \item \textbf{Compatibilidad:} La aplicación web debe ser compatible con las últimas versiones de Chrome, Firefox y Safari.
+    \end{itemize}
+\end{frame}
+
+% ==========================================
+% SECCIÓN 4: DIFERENCIAS Y EJERCICIOS
+% ==========================================
+\section{Diferencias Clave y Ejercicios}
+
+\begin{frame}{Diferencia Principal (Resumen)}
+    \begin{center}
+    \begin{tabular}{|p{5cm}|p{5cm}|}
+    \hline
+    \textbf{Funcionales (RF)} & \textbf{No Funcionales (RNF)} \\
+    \hline
+    Qué debe hacer el sistema. & Cómo debe comportarse el sistema. \\
+    \hline
+    Si no se cumple, el sistema no funciona. & Si no se cumple, el sistema puede funcionar pero con mala calidad. \\
+    \hline
+    Son específicos de la aplicación. & Suelen ser generales para la arquitectura. \\
+    \hline
+    \end{tabular}
+    \end{center}
+\end{frame}
+
+\begin{frame}{Próximos Pasos - Actividad del Proyecto}
+    \begin{block}{Tarea Práctica}
+        \begin{enumerate}
+            \item Reúnete con tu equipo y tomen la idea del proyecto definida en la Clase 1.
+            \item Redacten al menos \textbf{5 Requerimientos Funcionales} principales de su aplicación.
+            \item Redacten al menos \textbf{5 Requerimientos No Funcionales} que consideren críticos.
+        \end{enumerate}
+    \end{block}
+    \vspace{0.5cm}
+    \begin{center}
+        \Large \textbf{¡Sigamos construyendo!}
+    \end{center}
+\end{frame}
+
+\end{document}
